@@ -33,7 +33,7 @@ variable "public_subnet1_az" {
   default = "us-east-1a"
 }
 
-variable "public_subnet1_az" {
+variable "public_subnet2_az" {
   description = "Public Subnet 2 Availability Zone"
   default = "us-east-1b"
 }

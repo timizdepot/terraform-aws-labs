@@ -6,8 +6,8 @@ resource "aws_vpc" "default" {
   cidr_block = "${var.vpc_cidr_block}"
   enable_dns_hostnames = true
 
-  tags {
-    Name = "vpc-blog"
+  tags = {
+    Name = "vpc-tf-cicd-pipeline"
   }
 }
 
@@ -16,7 +16,7 @@ resource "aws_subnet" "public-subnet1" {
   vpc_id = "${aws_vpc.default.id}"
   availability_zone = "${var.public_subnet1_az}"
 
-  tags {
+  tags = {
     Name = "public-subnet-${var.public_subnet1_az}"
   }
 }
@@ -26,7 +26,7 @@ resource "aws_subnet" "public-subnet2" {
   vpc_id = "${aws_vpc.default.id}"
   availability_zone = "${var.public_subnet2_az}"
 
-  tags {
+  tags = {
     Name = "public-subnet-${var.public_subnet2_az}"
   }
 }
@@ -36,7 +36,7 @@ resource "aws_subnet" "private-subnet1" {
   vpc_id = "${aws_vpc.default.id}"
   availability_zone = "${var.private_subnet1_az}"
 
-  tags {
+  tags = {
     Name = "private-subnet-${var.private_subnet1_az}"
   }
 }
@@ -46,15 +46,15 @@ resource "aws_subnet" "private-subnet2" {
   vpc_id = "${aws_vpc.default.id}"
   availability_zone = "${var.private_subnet2_az}"
 
-  tags {
+  tags = {
     Name = "private-subnet-${var.private_subnet2_az}"
   }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.default.id}"
-
-  tags {
+# added an equal sign to the tag
+  tags = {
     Name = "WP Internet Gateway"
   }
 }
@@ -67,7 +67,7 @@ resource "aws_route_table" "default" {
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
 
-  tags {
+  tags = {
     Name = "Route table for Public subnet"
   }
 }
